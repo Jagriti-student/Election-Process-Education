@@ -27,12 +27,34 @@ const safetySettings = [
   },
 ];
 
+/**
+ * Helper to log structured data for Google Cloud Logging
+ */
+const cloudLog = (severity: string, message: string, payload?: any) => {
+  console.log(JSON.stringify({
+    severity,
+    message,
+    ...payload,
+    timestamp: new Date().toISOString(),
+    serviceContext: { service: 'election-assistant-ai' }
+  }));
+};
+
+/**
+ * Sends a prompt to the Google Gemini AI and returns the response.
+ * @param prompt The user's input string.
+ * @param history Conversation history for context-aware responses.
+ * @returns A promise resolving to the AI-generated text response.
+ */
 export async function getGeminiResponse(prompt: string, history: { role: string, parts: { text: string }[] }[]) {
   if (!API_KEY || API_KEY === "your_api_key_here") {
+    cloudLog('WARNING', 'Gemini API key is missing or set to placeholder.');
     return "I'm in 'Guide Mode' because my Gemini API key hasn't been set up yet. \n\nTo enable my full AI brain, please add your API key to the .env file in the project folder! \n\nFor now, I can still help you navigate using keywords like 'quiz', 'vote', or 'timeline'.";
   }
 
   try {
+    cloudLog('INFO', 'Sending prompt to Gemini API', { promptLength: prompt.length });
+    
     const chatSession = model.startChat({
       generationConfig,
       safetySettings,
@@ -40,9 +62,15 @@ export async function getGeminiResponse(prompt: string, history: { role: string,
     });
 
     const result = await chatSession.sendMessage(prompt);
-    return result.response.text();
-  } catch (error) {
-    console.error("Gemini API Error:", error);
+    const responseText = result.response.text();
+    
+    cloudLog('INFO', 'Successfully received response from Gemini', { responseLength: responseText.length });
+    return responseText;
+  } catch (error: any) {
+    cloudLog('ERROR', 'Gemini API Error occurred', { 
+      error: error.message,
+      stack: error.stack 
+    });
     return "I encountered an error while thinking. Let's try again or use the quick navigation options.";
   }
 }

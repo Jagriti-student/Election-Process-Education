@@ -28,19 +28,21 @@ export const Timeline: React.FC<TimelineProps> = ({ steps, activeStepId, onStepS
       {steps.map((step) => {
         const isActive = step.id === activeStepId;
         return (
-          <div 
+          <button 
             key={step.id} 
             className={`timeline-item ${isActive ? 'active' : ''}`}
             onClick={() => onStepSelect(step.id)}
+            aria-current={isActive ? 'step' : undefined}
+            aria-label={`Step: ${step.title}`}
           >
-            <div className="timeline-icon-wrapper">
+            <div className="timeline-icon-wrapper" aria-hidden="true">
               {isActive ? <CheckCircle2 size={16} color="white" /> : <Circle size={12} color="var(--glass-border)" />}
             </div>
             <div className="timeline-content">
-              <h3>{step.icon} {step.title}</h3>
+              <h3 className="flex items-center gap-2">{step.icon} {step.title}</h3>
               <p>{step.shortDescription}</p>
             </div>
-          </div>
+          </button>
         );
       })}
     </div>
