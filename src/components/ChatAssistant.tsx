@@ -77,19 +77,14 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ onNavigate, userPr
 
     // Instant navigation check for better UX
     const lowerInput = sanitizedInput.toLowerCase();
-    let navigated = false;
     if (lowerInput.includes('quiz') || lowerInput.includes('test')) {
       setTimeout(() => onNavigate('quiz'), 1000);
-      navigated = true;
     } else if (lowerInput.includes('vote') || lowerInput.includes('simulation') || lowerInput.includes('machine')) {
       setTimeout(() => onNavigate('simulation'), 1000);
-      navigated = true;
     } else if (lowerInput.includes('process') || lowerInput.includes('steps') || lowerInput.includes('timeline')) {
       setTimeout(() => onNavigate('timeline'), 1000);
-      navigated = true;
     } else if (lowerInput.includes('fake') || lowerInput.includes('news') || lowerInput.includes('fact')) {
       setTimeout(() => onNavigate('misinformation'), 1000);
-      navigated = true;
     }
 
     setIsLoading(true);
