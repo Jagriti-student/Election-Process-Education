@@ -14,37 +14,14 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ onNavigate, userPr
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const hasGreeted = useRef(false);
   
   // Ref to store conversation history for Gemini
   const chatHistory = useRef<{ role: string, parts: { text: string }[] }[]>([]);
 
   const userName = userProfile?.isFirstTimeVoter ? "First-time Voter" : "Citizen";
 
-  useEffect(() => {
-    // Initial greeting
-    const greeting = `Welcome ${userName}! I can help you understand elections in a simple way 😊\nWhat would you like to learn?`;
-    setMessages([
-      {
-        id: '1',
-        sender: 'ai',
-        text: greeting,
-        options: [
-          { id: 'opt1', text: '1. Full Election Process', action: () => handleOptionSelect('timeline', 'Full Election Process') },
-          { id: 'opt2', text: '2. Voting Simulation', action: () => handleOptionSelect('simulation', 'Voting Simulation') },
-          { id: 'opt3', text: '3. Quiz Mode', action: () => handleOptionSelect('quiz', 'Quiz Mode') },
-          { id: 'opt4', text: '4. Identify Fake News', action: () => handleOptionSelect('misinformation', 'Identify Fake News') },
-        ]
-      }
-    ]);
-    
-    chatHistory.current = [];
-  }, [userName]);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
-  const handleOptionSelect = (targetMode: string, text: string) => {
+  const handleOptionSelect = React.useCallback((targetMode: string, text: string) => {
     // Add user message
     const userMsg: ChatMessage = { id: Date.now().toString(), sender: 'user', text: `I want to try: ${text}` };
     setMessages(prev => [...prev, userMsg]);
@@ -62,9 +39,39 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ onNavigate, userPr
         onNavigate(targetMode);
       }, 1000);
     }, 600);
-  };
+  }, [onNavigate]);
 
-  const handleSendMessage = async () => {
+  useEffect(() => {
+    if (hasGreeted.current) return;
+    
+    // Initial greeting
+    const greeting = `Welcome ${userName}! I can help you understand elections in a simple way 😊\nWhat would you like to learn?`;
+    setMessages([
+      {
+        id: '1',
+        sender: 'ai',
+        text: greeting,
+        options: [
+          { id: 'opt1', text: '1. Full Election Process', action: () => handleOptionSelect('timeline', 'Full Election Process') },
+          { id: 'opt2', text: '2. Voting Simulation', action: () => handleOptionSelect('simulation', 'Voting Simulation') },
+          { id: 'opt3', text: '3. Quiz Mode', action: () => handleOptionSelect('quiz', 'Quiz Mode') },
+          { id: 'opt4', text: '4. Identify Fake News', action: () => handleOptionSelect('misinformation', 'Identify Fake News') },
+        ]
+      }
+    ]);
+    
+    chatHistory.current = [];
+    hasGreeted.current = true;
+  }, [userName, handleOptionSelect]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  /**
+   * Sends the user's message to the Gemini AI and handles the response.
+   */
+  const handleSendMessage = React.useCallback(async () => {
     const trimmedInput = inputValue.trim();
     if (!trimmedInput || isLoading) return;
     
@@ -103,7 +110,7 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ onNavigate, userPr
     chatHistory.current.push({ role: "model", parts: [{ text: aiResponseText }] });
     
     setIsLoading(false);
-  };
+  }, [inputValue, isLoading, onNavigate]);
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -125,7 +132,12 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ onNavigate, userPr
         </div>
       </div>
 
-      <div className="chat-messages flex-1 overflow-y-auto p-4 space-y-4">
+      <div 
+        className="chat-messages flex-1 overflow-y-auto p-4 space-y-4"
+        aria-live="polite"
+        aria-relevant="additions"
+        role="log"
+      >
         {messages.map((msg) => (
           <div key={msg.id} className={`flex items-start gap-2 ${msg.sender === 'user' ? 'flex-row-reverse' : ''}`}>
             <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center ${

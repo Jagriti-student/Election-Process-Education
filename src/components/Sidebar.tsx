@@ -1,8 +1,8 @@
 import React from 'react';
-import { BookOpen, CheckSquare, Clock, ShieldAlert, PlayCircle, Settings } from 'lucide-react';
+import { BookOpen, CheckSquare, Clock, ShieldAlert, PlayCircle, Settings, LayoutDashboard } from 'lucide-react';
 import '../styles/components.css';
 
-export type ViewMode = 'timeline' | 'simulation' | 'quiz' | 'misinformation' | 'settings';
+export type ViewMode = 'dashboard' | 'timeline' | 'simulation' | 'quiz' | 'misinformation' | 'settings';
 
 interface SidebarProps {
   activeMode: ViewMode;
@@ -12,6 +12,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeMode, onModeSelect, userProfile }) => {
   const menuItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={20} />, color: 'var(--primary-color)' },
     { id: 'timeline', label: 'Election Process', icon: <Clock size={20} />, color: 'var(--primary-light)' },
     { id: 'simulation', label: 'Voting Simulator', icon: <PlayCircle size={20} />, color: 'var(--secondary-color)' },
     { id: 'quiz', label: 'Knowledge Quiz', icon: <CheckSquare size={20} />, color: 'var(--accent-color)' },
@@ -37,17 +38,21 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeMode, onModeSelect, user
         </div>
       )}
 
-      <nav className="sidebar-nav">
-        <ul>
+      <nav className="sidebar-nav" aria-label="Main Navigation">
+        <ul role="menubar">
           {menuItems.map((item) => (
-            <li key={item.id}>
+            <li key={item.id} role="none">
               <button
                 className={`nav-btn ${activeMode === item.id ? 'active' : ''}`}
                 onClick={() => onModeSelect(item.id)}
+                role="menuitem"
+                aria-current={activeMode === item.id ? 'page' : undefined}
+                aria-label={`Go to ${item.label} view`}
               >
                 <div 
                   className="nav-icon" 
                   style={{ color: activeMode === item.id ? 'white' : item.color }}
+                  aria-hidden="true"
                 >
                   {item.icon}
                 </div>

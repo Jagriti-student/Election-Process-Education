@@ -1,20 +1,6 @@
-import React from 'react';
 import { CheckCircle2, Circle } from 'lucide-react';
+import type { ElectionStep } from '../types';
 import '../styles/components.css';
-
-export interface ElectionStep {
-  id: string;
-  title: string;
-  shortDescription: string;
-  duration: string;
-  detailedDescription: string;
-  tips: string[];
-  extraDetails?: {
-    importance: string;
-    whoIsInvolved: string;
-  };
-  icon: React.ReactNode;
-}
 
 interface TimelineProps {
   steps: ElectionStep[];
