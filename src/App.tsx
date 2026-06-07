@@ -32,7 +32,7 @@ function App() {
   const [userProfile, setUserProfile] = useLocalStorage<UserProfile | undefined>('civicProfile', undefined);
   const [showLanding, setShowLanding] = useState(!userProfile);
   const [showOnboarding, setShowOnboarding] = useState(false);
-  const [activeMode, setActiveMode] = useState<ViewMode>('dashboard');
+  const [activeMode, setActiveMode] = useState<ViewMode>('live-dashboard');
   const [activeStepId, setActiveStepId] = useState(ELECTION_STEPS[0].id);
 
   useEffect(() => {
