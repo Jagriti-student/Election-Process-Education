@@ -1,25 +1,25 @@
-🗳️ AI-Powered Election Education Assistant 🤖
+**🗳️ AI-Powered Election Education Assistant 🤖**
 
 A smart AI-powered civic education platform that simplifies the election process through interactive learning and personalized guidance.
 
-🌟 Project Overview
+**🌟 Project Overview**
 
 The AI-Powered Election Education Assistant is an interactive web application designed to educate citizens—especially first-time voters—about the democratic election process in a simple, engaging, and accessible way.
 
 It combines a structured learning timeline, interactive simulations, and an AI-powered assistant (Google Gemini) to make civic education more practical and user-friendly.
 
-❗ Problem Statement
+**❗ Problem Statement**
 
 Many first-time voters lack clear understanding of the election process, leading to confusion, misinformation, and low participation in democratic systems. Existing resources are often complex, static, and non-interactive.
 
-🌟 Project Focus
+**🌟 Project Focus**
 
 Vertical: Civic Engagement & Election Education
 
 This project aims to bridge the gap in voter awareness by making election education interactive, structured, and personalized using AI.
 
-💡 Key Features
-🧭 1. Progressive Election Timeline
+**💡 Key Features**
+**🧭 1. Progressive Election Timeline**
 
 A structured step-by-step learning system:
 
@@ -31,7 +31,7 @@ Result Declaration
 
 Each stage is interactive and self-paced.
 
-🗳️ 2. Voting Simulator
+**🗳️ 2. Voting Simulator**
 
 A virtual polling booth experience that teaches:
 
@@ -41,15 +41,17 @@ First-time voter guidance
 
 👉 Reduces voting confusion and anxiety
 
-🎯 3. Knowledge Quiz System
+**🎯 3. Knowledge Quiz System**
 Interactive quizzes
 Instant feedback
 Gamified learning experience
-🧠 4. Misinformation Awareness Tool
+
+**🧠 4. Misinformation Awareness Tool**
 Identifies fake or misleading information
 Promotes critical thinking
 Improves digital literacy
-🤖 5. AI-Powered Assistant (Google Gemini)
+
+**🤖 5. AI-Powered Assistant (Google Gemini)**
 
 A smart civic guide that:
 
@@ -68,30 +70,21 @@ Supports natural conversation + navigation
 
 
 
-⚙️ Tech Stack
+**⚙️ Tech Stack**
 
-Frontend:
-
+**Frontend:**
 React (Vite)
 TypeScript
-
-Styling:
-
+**Styling:**
 Tailwind CSS
 Glassmorphism UI Design
-
-AI Integration:
-
+**AI Integration:**
 Google Gemini 1.5 Flash
 @google/generative-ai SDK
-
-State Management:
-
+**State Management:**
 React Hooks
 LocalStorage
-
-Testing:
-
+**Testing:**
 Vitest
 🧠 System Architecture
 🔹 Onboarding System
@@ -106,23 +99,23 @@ ChatAssistant.tsx → Hybrid system:
 React.lazy() and Suspense
 Lazy loading for heavy modules
 Optimized initial load time
-🚧 Assumptions
+**🚧 Assumptions**
 Election process is based on universal democratic systems
 User has access to a Gemini API key
 Browser supports localStorage
 Application is strictly non-partisan and educational
-🌍 Impact
+**🌍 Impact**
 Improves voter awareness among youth and first-time voters
 Reduces misinformation through guided learning
 Makes civic education interactive and engaging
 Encourages democratic participation
-🚀 Future Improvements
+**🚀 Future Improvements**
 Multi-language support for wider accessibility
 Real-time election data integration
 Mobile application version
 Voice-based AI assistant
-🌐 Live Demo:  https://election-system-495006.web.app
-⚙️ Getting Started
+**🌐 Live Demo:  https://election-system-495006.web.app**
+**⚙️ Getting Started**
 1. Install dependencies
 npm install
 2. Setup environment
@@ -134,10 +127,10 @@ VITE_GEMINI_API_KEY=your_api_key_here
 npm run dev
 4. Run tests
 npx vitest run
-❤️ Built With Purpose
+** Built With Purpose**
 
 Developed to build a more informed, aware, and empowered democratic society through the power of AI and interactive education.
 
-🏁 Summary
+**🏁 Summary**
 
 This project transforms traditional civic education into a modern AI-driven learning experience, making democracy more accessible to everyone.
