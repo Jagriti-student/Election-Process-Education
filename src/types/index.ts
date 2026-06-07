@@ -11,7 +11,7 @@ export interface UserProfile {
 }
 
 /** The set of available view modes for the main application layout. */
-export type ViewMode = 'dashboard' | 'timeline' | 'simulation' | 'quiz' | 'misinformation' | 'settings';
+export type ViewMode = 'dashboard' | 'timeline' | 'simulation' | 'quiz' | 'misinformation' | 'settings' | 'live-dashboard';
 
 /** Represents a single step in the election process timeline. */
 export interface ElectionStep {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Fingerprint, CheckSquare, Building, FileText, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { voteStorage } from '../services/voteStorage';
 import '../styles/components.css';
 
 interface SimStep {
@@ -33,6 +34,7 @@ export const VotingSimulator: React.FC = () => {
 
   const handleVote = (candidateId: string) => {
     setSelectedCandidate(candidateId);
+    voteStorage.castVote(candidateId);
     setTimeout(() => {
       setHasVoted(true);
       handleNextStep();

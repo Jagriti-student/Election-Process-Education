@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { VotingSimulator } from '../components/VotingSimulator';
 import '@testing-library/jest-dom';
@@ -11,7 +11,7 @@ describe('VotingSimulator Component', () => {
 
   it('shows the first step: Enter Polling Station', () => {
     render(<VotingSimulator />);
-    expect(screen.getByText(/Enter Polling Station/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Enter Polling Station/i })).toBeInTheDocument();
   });
 
   it('shows the electoral roll search input on step 1', () => {

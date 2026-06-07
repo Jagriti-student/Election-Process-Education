@@ -17,6 +17,7 @@ import './styles/components.css';
 const VotingSimulator = lazy(() => import('./components/VotingSimulator').then(m => ({ default: m.VotingSimulator })));
 const QuizMode = lazy(() => import('./components/QuizMode').then(m => ({ default: m.QuizMode })));
 const MisinformationGuide = lazy(() => import('./components/MisinformationGuide').then(m => ({ default: m.MisinformationGuide })));
+const LiveElectionDashboard = lazy(() => import('./components/LiveElectionDashboard').then(m => ({ default: m.LiveElectionDashboard })));
 
 import { LandingPage } from './components/LandingPage';
 import { Dashboard } from './components/Dashboard';
@@ -117,6 +118,12 @@ function App() {
             userProfile={userProfile} 
             onNavigate={(mode) => setActiveMode(mode as ViewMode)} 
           />
+        );
+      case 'live-dashboard':
+        return (
+          <Suspense fallback={<div className="flex items-center justify-center h-full text-indigo-400">Loading Live Dashboard...</div>}>
+            <LiveElectionDashboard />
+          </Suspense>
         );
       case 'settings':
         return (

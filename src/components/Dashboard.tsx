@@ -108,6 +108,22 @@ export const Dashboard: React.FC<DashboardProps> = ({ userProfile, onNavigate })
                 </div>
                 <ChevronRight size={18} className="text-slate-600 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
               </button>
+
+              <button 
+                onClick={() => onNavigate('live-dashboard')}
+                className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors text-left group"
+                role="listitem"
+                aria-label="View Live Election Dashboard"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-2 h-2 rounded-full bg-indigo-500" aria-hidden="true"></div>
+                  <div>
+                    <h3 className="font-semibold group-hover:text-indigo-400 transition-colors">See Live Election Polls</h3>
+                    <p className="text-sm text-slate-400">Cast mock votes and track real-time statistics</p>
+                  </div>
+                </div>
+                <ChevronRight size={18} className="text-slate-600 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+              </button>
             </div>
           </section>
 

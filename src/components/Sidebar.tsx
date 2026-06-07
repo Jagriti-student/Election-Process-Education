@@ -1,8 +1,8 @@
 import React from 'react';
-import { BookOpen, CheckSquare, Clock, ShieldAlert, PlayCircle, Settings, LayoutDashboard } from 'lucide-react';
+import { BookOpen, CheckSquare, Clock, ShieldAlert, PlayCircle, Settings, LayoutDashboard, BarChart3 } from 'lucide-react';
 import '../styles/components.css';
 
-export type ViewMode = 'dashboard' | 'timeline' | 'simulation' | 'quiz' | 'misinformation' | 'settings';
+export type ViewMode = 'dashboard' | 'timeline' | 'simulation' | 'quiz' | 'misinformation' | 'settings' | 'live-dashboard';
 
 interface SidebarProps {
   activeMode: ViewMode;
@@ -15,6 +15,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeMode, onModeSelect, user
     { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={20} />, color: 'var(--primary-color)' },
     { id: 'timeline', label: 'Election Process', icon: <Clock size={20} />, color: 'var(--primary-light)' },
     { id: 'simulation', label: 'Voting Simulator', icon: <PlayCircle size={20} />, color: 'var(--secondary-color)' },
+    { id: 'live-dashboard', label: 'Live Dashboard', icon: <BarChart3 size={20} />, color: '#818CF8' },
     { id: 'quiz', label: 'Knowledge Quiz', icon: <CheckSquare size={20} />, color: 'var(--accent-color)' },
     { id: 'misinformation', label: 'Fact Check', icon: <ShieldAlert size={20} />, color: '#F59E0B' }, // Amber
   ] as const;
