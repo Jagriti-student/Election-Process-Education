@@ -75,46 +75,81 @@ Supports natural conversation + navigation
 **Frontend:**
 React (Vite)
 TypeScript
+
 **Styling:**
 Tailwind CSS
 Glassmorphism UI Design
+
 **AI Integration:**
 Google Gemini 1.5 Flash
 @google/generative-ai SDK
+
 **State Management:**
 React Hooks
 LocalStorage
+
 **Testing:**
+
 Vitest
+
 🧠 System Architecture
+
 🔹 Onboarding System
+
 Collects user details (e.g., first-time voter, location)
+
 Personalizes learning path and AI responses
+
 🔹 AI System Flow
+
 GeminiService.ts → Handles AI communication
+
 ChatAssistant.tsx → Hybrid system:
+
 ⚡ Fast keyword-based navigation
+
 🤖 Gemini AI for complex queries
+
 🔹 Performance Optimization
+
 React.lazy() and Suspense
+
 Lazy loading for heavy modules
+
 Optimized initial load time
+
 **🚧 Assumptions**
+
 Election process is based on universal democratic systems
+
 User has access to a Gemini API key
+
 Browser supports localStorage
+
 Application is strictly non-partisan and educational
+
 **🌍 Impact**
+
 Improves voter awareness among youth and first-time voters
+
 Reduces misinformation through guided learning
+
 Makes civic education interactive and engaging
+
 Encourages democratic participation
+
 **🚀 Future Improvements**
+
 Multi-language support for wider accessibility
+
 Real-time election data integration
+
 Mobile application version
+
 Voice-based AI assistant
+
 **🌐 Live Demo:  https://election-system-495006.web.app**
+
 **⚙️ Getting Started**
 1. Install dependencies
 npm install
